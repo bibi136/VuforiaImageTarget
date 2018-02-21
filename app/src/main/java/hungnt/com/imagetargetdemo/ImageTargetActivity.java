@@ -15,7 +15,6 @@ import android.widget.RelativeLayout;
 import com.vuforia.CameraDevice;
 import com.vuforia.DataSet;
 import com.vuforia.HINT;
-import com.vuforia.Image;
 import com.vuforia.ObjectTracker;
 import com.vuforia.STORAGE_TYPE;
 import com.vuforia.State;
@@ -32,13 +31,17 @@ public class ImageTargetActivity extends Activity implements SampleApplicationCo
     private SampleApplicationGLView mGlView;
     private BookRenderer mRenderer;
     private DataSet mDataSet;
-    private DataSet mDataSet1;
+    private RelativeLayout mUILayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //Init Vuforia
+        mUILayout = (RelativeLayout) View.inflate(this, R.layout.camera_overlay_reticle, null);
+
+        addContentView(mUILayout, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT));
+
         mVuforiaAppSession = new VuforiaApplicationSession(this);
         mVuforiaAppSession.initAR(this, ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
@@ -86,17 +89,14 @@ public class ImageTargetActivity extends Activity implements SampleApplicationCo
 
         // Trying to initialize the image tracker
         tracker = tManager.initTracker(ObjectTracker.getClassType());
-        if (tracker == null)
-        {
+        if (tracker == null) {
             Log.e(
                     LOGTAG,
                     "Tracker not initialized. Tracker already initialized or the camera is already started");
             result = false;
-        } else
-        {
+        } else {
             Log.i(LOGTAG, "Tracker successfully initialized");
         }
-        Vuforia.setHint(HINT.HINT_MAX_SIMULTANEOUS_IMAGE_TARGETS, 10);
         return result;
     }
 
@@ -110,41 +110,17 @@ public class ImageTargetActivity extends Activity implements SampleApplicationCo
         }
 
         if (mDataSet == null) {
-            mDataSet = objectTracker.createDataSet();
-            mDataSet1 = objectTracker.createDataSet();
-        }
-
-        if (mDataSet == null) {
             return false;
         }
 
         if (!mDataSet.load("op87_ar.xml", STORAGE_TYPE.STORAGE_APPRESOURCE)) {
             return false;
         }
-//
-//        if (!mDataSet.load("StonesAndChips.xml", STORAGE_TYPE.STORAGE_APPRESOURCE)) {
-//            return false;
-//        }
-
 
         if (!objectTracker.activateDataSet(mDataSet)) {
             return false;
         }
 
-        // Show all target imported
-        int numTrackables = mDataSet.getNumTrackables();
-        for (int count = 0; count < numTrackables; count++) {
-            Trackable trackable = mDataSet.getTrackable(count);
-            // TODO extend tracking
-//            if (isExtendedTrackingActive()) {
-//                trackable.startExtendedTracking();
-//            }
-
-            String name = "Current Dataset : " + trackable.getName();
-            trackable.setUserData(name);
-            Log.d(LOGTAG, "UserData:Set the following user data "
-                    + (String) trackable.getUserData());
-        }
         return true;
     }
 
@@ -159,7 +135,6 @@ public class ImageTargetActivity extends Activity implements SampleApplicationCo
 
     @Override
     public boolean doStopTrackers() {
-        // Indicate if the trackers were stopped correctly
         boolean result = true;
 
         Tracker objectTracker = TrackerManager.getInstance().getTracker(
@@ -172,7 +147,6 @@ public class ImageTargetActivity extends Activity implements SampleApplicationCo
 
     @Override
     public boolean doUnloadTrackersData() {
-        // Indicate if the trackers were unloaded correctly
         boolean result = true;
 
         TrackerManager tManager = TrackerManager.getInstance();
@@ -181,14 +155,11 @@ public class ImageTargetActivity extends Activity implements SampleApplicationCo
         if (objectTracker == null)
             return false;
 
-        if (mDataSet != null && mDataSet.isActive())
-        {
+        if (mDataSet != null && mDataSet.isActive()) {
             if (objectTracker.getActiveDataSet(0).equals(mDataSet)
-                    && !objectTracker.deactivateDataSet(mDataSet))
-            {
+                    && !objectTracker.deactivateDataSet(mDataSet)) {
                 result = false;
-            } else if (!objectTracker.destroyDataSet(mDataSet))
-            {
+            } else if (!objectTracker.destroyDataSet(mDataSet)) {
                 result = false;
             }
 
@@ -200,7 +171,6 @@ public class ImageTargetActivity extends Activity implements SampleApplicationCo
 
     @Override
     public boolean doDeinitTrackers() {
-        // Indicate if the trackers were deinitialized correctly
         boolean result = true;
 
         TrackerManager tManager = TrackerManager.getInstance();
@@ -217,18 +187,17 @@ public class ImageTargetActivity extends Activity implements SampleApplicationCo
             return;
         }
 
-        // Create OpenGL ES View
         mGlView = new SampleApplicationGLView(this);
         mGlView.init(Vuforia.requiresAlpha(), 16, 0);
 
-        // Init renderer
         mRenderer = new BookRenderer(this, mVuforiaAppSession);
         mGlView.setRenderer(mRenderer);
-
 
         mRenderer.setActive(true);
         addContentView(mGlView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT));
+        mUILayout.bringToFront();
+        mUILayout.setBackgroundColor(Color.TRANSPARENT);
 
         mVuforiaAppSession.startAR(CameraDevice.CAMERA_DIRECTION.CAMERA_DIRECTION_DEFAULT);
     }
@@ -248,12 +217,8 @@ public class ImageTargetActivity extends Activity implements SampleApplicationCo
 
     @Override
     public void onVuforiaStarted() {
-        // Set camera focus mode
-        if(!CameraDevice.getInstance().setFocusMode(CameraDevice.FOCUS_MODE.FOCUS_MODE_CONTINUOUSAUTO))
-        {
-            // If continuous autofocus mode fails, attempt to set to a different mode
-            if(!CameraDevice.getInstance().setFocusMode(CameraDevice.FOCUS_MODE.FOCUS_MODE_TRIGGERAUTO))
-            {
+        if (!CameraDevice.getInstance().setFocusMode(CameraDevice.FOCUS_MODE.FOCUS_MODE_CONTINUOUSAUTO)) {
+            if (!CameraDevice.getInstance().setFocusMode(CameraDevice.FOCUS_MODE.FOCUS_MODE_TRIGGERAUTO)) {
                 CameraDevice.getInstance().setFocusMode(CameraDevice.FOCUS_MODE.FOCUS_MODE_NORMAL);
             }
         }
@@ -266,7 +231,6 @@ public class ImageTargetActivity extends Activity implements SampleApplicationCo
         mVuforiaAppSession.onConfigurationChanged();
     }
 
-    // Shows initialization error messages as System dialogs
     public void showInitializationErrorMessage(String message) {
         final String errorMessage = message;
         runOnUiThread(new Runnable() {
@@ -275,7 +239,6 @@ public class ImageTargetActivity extends Activity implements SampleApplicationCo
                     mErrorDialog.dismiss();
                 }
 
-                // Generates an Alert Dialog to show the error message
                 AlertDialog.Builder builder = new AlertDialog.Builder(
                         ImageTargetActivity.this);
                 builder
@@ -283,12 +246,11 @@ public class ImageTargetActivity extends Activity implements SampleApplicationCo
                         .setTitle(getString(R.string.INIT_ERROR))
                         .setCancelable(false)
                         .setIcon(0)
-                        .setPositiveButton("OK",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
-                                        finish();
-                                    }
-                                });
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                finish();
+                            }
+                        });
 
                 mErrorDialog = builder.create();
                 mErrorDialog.show();
