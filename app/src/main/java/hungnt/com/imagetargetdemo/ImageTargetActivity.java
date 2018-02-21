@@ -109,6 +109,9 @@ public class ImageTargetActivity extends Activity implements SampleApplicationCo
             return false;
         }
 
+        if (mDataSet == null)
+            mDataSet = objectTracker.createDataSet();
+
         if (mDataSet == null) {
             return false;
         }
