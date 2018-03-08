@@ -48,7 +48,7 @@
 
 <section type="custom" sub_type="chakra_meter"/>
 <!--  【領域】MANGA枠（最初から読むボタン〜既読表示スイッチ含む）  -->
-<section type="custom" sub_type="manga_area"/>
+<section type="custom" sub_type="manga_area"/
 <!--  【領域】巻物UI  -->
 <section type="custom" sub_type="hen_selector"/>
 </navigation>
