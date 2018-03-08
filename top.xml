@@ -1,0 +1,54 @@
+
+<navigation>
+<!--  【領域】バナー  -->
+<section type="top_banners">
+<banner image_url="https://www.onepieceapp.jp/005/_image/comic_boruto_4.png" image_width="640" image_height="290" url="https://www.onepieceapp.jp/ar/op87/camera.html?ga=test_ar87" title="テスト" description="ar87"/>
+<banner image_url="https://www.onepieceapp.jp/005/_image/comic_boruto_4.png" image_width="640" image_height="290" url="https://www.onepieceapp.jp/ar/op86/camera.html?ga=test_ar86" title="テスト" description="ar86"/>
+<banner image_url="https://www.onepieceapp.jp/005/_image/comic_boruto_4.png" image_width="640" image_height="290" url="https://www.onepieceapp.jp/ar/op85/camera.html?ga=test_ar85" title="テスト" description="ar85"/>
+<banner image_url="https://www.onepieceapp.jp/005/_image/comic_boruto_4.png" image_width="640" image_height="290" url="https://www.onepieceapp.jp/ar/op84/camera.html?ga=test_ar84" title="テスト" description="ar84"/>
+<banner image_url="https://www.onepieceapp.jp/005/_image/comic_boruto_4.png" image_width="640" image_height="290" url="https://www.onepieceapp.jp/ar/op83/camera.html?ga=test_ar83" title="テスト" description="ar83"/>
+<banner image_url="https://www.onepieceapp.jp/005/_image/news_180210.jpg" image_width="640" image_height="290" url="https://www.onepieceapp.jp/newspaper/news.html?ga=test_newscoo" title="テスト" description=""/>
+<banner image_url="https://www.onepieceapp.jp/005/_image/kuchiyose.jpg" image_width="640" image_height="290" url="https://www.onepieceapp.jp/log_game/_php/index.php?ga=test_game" title="TEST" description="ミニゲーム"/>
+<banner image_url="https://www.onepieceapp.jp/005/_image/comic_boruto_4.png" image_width="640" image_height="290" url="https://www.onepieceapp.jp/store/?ga=test_store" title="テスト" description="ストアページ"/>
+<!--
+ <banner image_url="https://www.onepieceapp.jp/005/_image/oshirase.jpg" image_width="640" image_height="290" url="https://www.onepieceapp.jp/oshirase/" title="" description="" /> 
+-->
+</section>
+<!--  横1分割バナー（常用しないが運用により挿入される場合もある）  -->
+<!--
+
+<section type="grid_banners" banner_width_size="medium">
+  <banner image_url="https://www.onepieceapp.jp/top/sample05.png" image_width="640" image_height="190" title="" url="https://www.onepieceapp.jp/webview/special/spin_off/index.html" />
+</section>
+-->
+<!--  横2分割バナー（常用しないが運用により挿入される場合もある）  -->
+<!--
+
+<section type="grid_banners" banner_width_size="small">
+  <banner image_url="https://www.onepieceapp.jp/top/sample06.png" image_width="300" image_height="190" title="" description="勝つ！ガールズ・コメディ。" url="https://www.onepieceapp.jp/webview/history/hanayoridango/index.html" />
+  <banner image_url="https://www.onepieceapp.jp/top/sample07.png" image_width="300" image_height="190" title="" description="16歳、今のあたしは「余生」を送っている―。" url="https://www.onepieceapp.jp/webview/history/catstreet/index.html" />
+</section>
+-->
+<!--  【領域】チャクラメーター  -->
+
+<section type="grid_banners" banner_width_size="medium" title="スペシャル" title_icon_url="https://www.hanadanapp.jp/top/icon_special.png">
+<banner image_url="https://www.hanadanapp.jp/top/sp_banner01.png" image_width="640" image_height="190" title="" url="https://www.hanadanapp.jp/webview/special/spin_off/index3.html"/>
+<banner image_url="https://www.hanadanapp.jp/top/sp_banner02.png" image_width="640" image_height="190" title="" url="https://www.hanadanapp.jp/webview/special/wallpaper/"/>
+<banner image_url="https://www.hanadanapp.jp/top/sp_banner03.png" image_width="640" image_height="190" title="" url="com-access-browser://?url=line://shop/detail/1199029"/>
+<banner image_url="https://www.hanadanapp.jp/top/sp_banner04.png" image_width="640" image_height="190" title="" url="com-access-store://works?work_id=HANANOCHIHARE_MONO"/>
+</section>
+
+<section type="grid_banners" banner_width_size="small" title="作品ラインナップ" description="数々の名作全て読めます！" title_icon_url="https://www.hanadanapp.jp/top/icon_lineup.png">
+<banner image_url="https://www.hanadanapp.jp/top/product_01.png" image_width="300" image_height="190" title="" description="勝つ！ガールズ・コメディ。" url="https://www.hanadanapp.jp/webview/history/hanayoridango/index.html"/>
+<banner image_url="https://www.hanadanapp.jp/top/product_02.png" image_width="300" image_height="190" title="" description="16歳、今のあたしは「余生」を送っている―。" url="https://www.hanadanapp.jp/webview/history/catstreet/index.html"/>
+<banner image_url="https://www.hanadanapp.jp/top/product_03.png" image_width="300" image_height="190" title="" description="女子高生ときどき…女子プロレスラー" url="https://www.hanadanapp.jp/webview/history/matsurispecial/index.html"/>
+<banner image_url="https://www.hanadanapp.jp/top/product_05.png" image_width="300" image_height="190" title="" description="悪魔と女子高生の最凶コンビ、誕生!?" url="https://www.hanadanapp.jp/webview/history/ibaranokanmuri/index.html"/>
+<banner image_url="https://www.hanadanapp.jp/top/product_06.png" image_width="300" image_height="190" title="" description="もうひとつの「花男」開幕！" url="https://www.hanadanapp.jp/webview/history/hananochihare/index.html"/>
+</section>
+
+<section type="custom" sub_type="chakra_meter"/>
+<!--  【領域】MANGA枠（最初から読むボタン〜既読表示スイッチ含む）  -->
+<section type="custom" sub_type="manga_area"/>
+<!--  【領域】巻物UI  -->
+<section type="custom" sub_type="hen_selector"/>
+</navigation>
